@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Dashboard | SevaDeep</title>
+
+    <link rel="icon" type="image/png" href="images/sevadeep-logo.png" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-sm navbar-seva">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="images/sevadeep-logo.png" alt="SevaDeep" />
+        </a>
+        <div class="d-flex align-items-center gap-3">
+          <span class="badge bg-danger">Admin Portal</span>
+          <a href="login.html" class="btn-seva btn-seva--dark btn-seva--small"
+            >Log out</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <main class="auth-page py-4">
+      <div class="container" style="max-width: 960px">
+        <!-- Header Title -->
+        <div class="d-flex align-items-center gap-3 mb-4">
+          <span class="icon-circle" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </span>
+          <div>
+            <h1 class="h2 mb-0">Admin Panel</h1>
+            <p class="text-muted mb-0">
+              Overview of active groups and registered volunteers.
+            </p>
+          </div>
+        </div>
+
+        <!-- Section 1: Active Groups & Participants Dropdown -->
+        <div
+          class="card p-4 border-0 shadow-sm mb-5"
+          style="background: var(--card)"
+        >
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h4 mb-0">Volunteer Groups</h2>
+            <span class="badge bg-secondary">Total Groups: 3</span>
+          </div>
+
+          <div class="accordion" id="groupsAccordion">
+            <!-- Group 1 -->
+            <div class="accordion-item rounded-0 border-0 mb-2">
+              <h2 class="accordion-header" id="headingOne">
+                <button
+                  class="accordion-button collapsed fw-bold"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="false"
+                  aria-controls="collapseOne"
+                >
+                  Food Distribution - Team Alpha (12 / 15 Participants)
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingOne"
+                data-bs-parent="#groupsAccordion"
+              >
+                <div class="accordion-body bg-white">
+                  <p class="small text-muted mb-2">
+                    <strong>Institution:</strong> SIT Pune |
+                    <strong>Mentor:</strong> Prof. Sharma
+                  </p>
+                  <table class="table table-sm table-hover mb-0">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Total Hours</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Soham Phansalkar</td>
+                        <td>soham@example.com</td>
+                        <td>24 hrs</td>
+                      </tr>
+                      <tr>
+                        <td>Shubham Chitrakar</td>
+                        <td>shubham@example.com</td>
+                        <td>18 hrs</td>
+                      </tr>
+                      <tr>
+                        <td>Talib Jiruwala</td>
+                        <td>talib@example.com</td>
+                        <td>20 hrs</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group 2 -->
+            <div class="accordion-item rounded-0 border-0 mb-2">
+              <h2 class="accordion-header" id="headingTwo">
+                <button
+                  class="accordion-button collapsed fw-bold"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                >
+                  Teaching Support - Team Beta (8 / 10 Participants)
+                </button>
+              </h2>
+              <div
+                id="collapseTwo"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingTwo"
+                data-bs-parent="#groupsAccordion"
+              >
+                <div class="accordion-body bg-white">
+                  <p class="small text-muted mb-2">
+                    <strong>Institution:</strong> Symbiosis College |
+                    <strong>Mentor:</strong> Dr. Kulkarni
+                  </p>
+                  <table class="table table-sm table-hover mb-0">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Total Hours</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Tanmay Sheware</td>
+                        <td>tanmay@example.com</td>
+                        <td>15 hrs</td>
+                      </tr>
+                      <tr>
+                        <td>Aarav Mehta</td>
+                        <td>aarav@example.com</td>
+                        <td>12 hrs</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group 3 -->
+            <div class="accordion-item rounded-0 border-0">
+              <h2 class="accordion-header" id="headingThree">
+                <button
+                  class="accordion-button collapsed fw-bold"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree"
+                >
+                  Clothing Drive - Team Gamma (5 / 20 Participants)
+                </button>
+              </h2>
+              <div
+                id="collapseThree"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingThree"
+                data-bs-parent="#groupsAccordion"
+              >
+                <div class="accordion-body bg-white">
+                  <p class="small text-muted mb-2">
+                    <strong>Institution:</strong> MIT World Peace University |
+                    <strong>Mentor:</strong> Mrs. Joshi
+                  </p>
+                  <table class="table table-sm table-hover mb-0">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Total Hours</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Riya Sen</td>
+                        <td>riya@example.com</td>
+                        <td>8 hrs</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Volunteer Management Table -->
+        <div
+          class="card p-4 border-0 shadow-sm"
+          style="background: var(--card)"
+        >
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h4 mb-0">All Registered Volunteers</h2>
+            <input
+              type="text"
+              class="form-control form-control-sm w-auto"
+              placeholder="Search user..."
+            />
+          </div>
+
+          <div class="table-responsive bg-white">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Contact</th>
+                  <th>Group Name</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Soham Phansalkar</strong></td>
+                  <td>soham@example.com</td>
+                  <td>9876543210</td>
+                  <td>Team Alpha</td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-seva btn-seva--crimson btn-seva--small"
+                    >
+                      Ban
+                    </button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td><strong>Shubham Chitrakar</strong></td>
+                  <td>shubham@example.com</td>
+                  <td>9876543211</td>
+                  <td>Team Alpha</td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-seva btn-seva--crimson btn-seva--small"
+                    >
+                      Ban
+                    </button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td><strong>Talib Jiruwala</strong></td>
+                  <td>talib@example.com</td>
+                  <td>9876543212</td>
+                  <td>Team Alpha</td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-seva btn-seva--crimson btn-seva--small"
+                    >
+                      Ban
+                    </button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td><strong>Tanmay Sheware</strong></td>
+                  <td>tanmay@example.com</td>
+                  <td>9876543213</td>
+                  <td>Team Beta</td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-seva btn-seva--crimson btn-seva--small"
+                    >
+                      Ban
+                    </button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td><strong>Aarav Mehta</strong></td>
+                  <td>aarav@example.com</td>
+                  <td>9876543214</td>
+                  <td>Team Beta</td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-seva btn-seva--crimson btn-seva--small"
+                    >
+                      Ban
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container">
+        <p class="footer-title">Project by</p>
+        <ul class="footer-team">
+          <li><strong>Soham Phansalkar</strong><span>24070122202</span></li>
+          <li><strong>Shubham Chitrakar</strong><span>24070122195</span></li>
+          <li><strong>Talib Jiruwala</strong><span>24070122215</span></li>
+          <li><strong>Tanmay Sheware</strong><span>24070122216</span></li>
+        </ul>
+        <p class="footer-college">SIT, Pune : CSE C1</p>
+      </div>
+    </footer>
+
+    <script>
+      (function checkAdminAuth() {
+        const adminUser = "a";
+        const adminPass = "admin";
+
+        const inputUser = prompt("Enter Admin Username:");
+        const inputPass = prompt("Enter Admin Password:");
+
+        if (inputUser !== adminUser || inputPass !== adminPass) {
+          alert("Access Denied: Incorrect Username or Password!");
+          window.location.href = "login.html";
+        }
+      })();
+    </script>
+
+    <script src="script.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Add Attendance | SevaDeep</title>
+
+    <link rel="icon" type="image/png" href="images/sevadeep-logo.png" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-md navbar-seva">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="images/sevadeep-logo.png" alt="SevaDeep" />
+        </a>
+
+        <!-- Mobile Toggle Button -->
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarMenu"
+          aria-controls="navbarMenu"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links & Actions -->
+        <div class="collapse navbar-collapse" id="navbarMenu">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0 ms-md-4 gap-md-3">
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link fw-bold"
+                style="color: var(--crimson)"
+                href="add-attendance.html"
+                >Add Attendance</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="create-group.html"
+                >Create Group</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="admin.html">Admin</a>
+            </li>
+          </ul>
+          <div class="d-flex">
+            <a href="login.html" class="btn-seva btn-seva--dark btn-seva--small"
+              >Log out</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="auth-page">
+      <div class="container">
+        <div class="auth-card">
+          <!-- Heading with icon in a red circle -->
+          <div class="text-center mb-4">
+            <span class="icon-circle" aria-hidden="true">
+              <!-- Calendar / Check Icon -->
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+                <path d="m9 16 2 2 4-4" />
+              </svg>
+            </span>
+            <h1>Record Attendance</h1>
+            <p class="mb-0">Log hours and activity details for your group.</p>
+          </div>
+
+          <!-- Add Attendance Form -->
+          <form id="attendanceForm">
+            <!-- 1. Activity Date -->
+            <div class="mb-3">
+              <label for="activityDate" class="form-label">Activity date</label>
+              <input
+                type="date"
+                class="form-control"
+                id="activityDate"
+                required
+              />
+            </div>
+
+            <!-- 2. Hours Worked -->
+            <div class="mb-3">
+              <label for="hoursWorked" class="form-label"
+                >Hours worked / duration</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="hoursWorked"
+                min="0.5"
+                step="0.5"
+                placeholder="e.g., 2.5"
+                required
+              />
+            </div>
+
+            <!-- 3. Activity Name -->
+            <div class="mb-3">
+              <label for="activityName" class="form-label">Activity name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="activityName"
+                placeholder="e.g., Food Distribution Drive"
+                required
+              />
+            </div>
+
+            <!-- 4. Remarks / Note (Optional) -->
+            <div class="mb-4">
+              <label for="activityNote" class="form-label"
+                >Note / remarks (optional)</label
+              >
+              <textarea
+                class="form-control"
+                id="activityNote"
+                rows="3"
+                placeholder="Additional details or notes about the session..."
+              ></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-seva w-100">
+              Submit Attendance
+            </button>
+
+            <!-- Status message container -->
+            <p id="formMessage" class="form-message" role="alert"></p>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container">
+        <p class="footer-title">Project by</p>
+        <ul class="footer-team">
+          <li><strong>Soham Phansalkar</strong><span>24070122202</span></li>
+          <li><strong>Shubham Chitrakar</strong><span>24070122195</span></li>
+          <li><strong>Talib Jiruwala</strong><span>24070122215</span></li>
+          <li><strong>Tanmay Sheware</strong><span>2407012216</span></li>
+        </ul>
+        <p class="footer-college">SIT, Pune : CSE C1</p>
+      </div>
+    </footer>
+
+    <!-- WhatsApp floating button -->
+    <a
+      class="whatsapp-btn"
+      href="https://wa.me/91XXXXXXXXXX"
+      target="_blank"
+      rel="noopener"
+      aria-label="Chat on WhatsApp"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+        />
+      </svg>
+    </a>
+
+    <script src="script.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

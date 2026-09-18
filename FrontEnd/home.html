@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home | SevaDeep Attendance</title>
+
+    <link rel="icon" type="image/png" href="images/sevadeep-logo.png" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-md navbar-seva">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="images/sevadeep-logo.png" alt="SevaDeep" />
+        </a>
+
+        <!-- Mobile Toggle Button -->
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarMenu"
+          aria-controls="navbarMenu"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links & Buttons -->
+        <div class="collapse navbar-collapse" id="navbarMenu">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0 ms-md-4 gap-md-3">
+            <li class="nav-item">
+              <a
+                class="nav-link fw-bold"
+                style="color: var(--crimson)"
+                href="home.html"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="add-attendance.html"
+                >Add Attendance</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="create-group.html"
+                >Create Group</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="admin.html">Admin</a>
+            </li>
+          </ul>
+          <div class="d-flex">
+            <a href="login.html" class="btn-seva btn-seva--dark btn-seva--small"
+              >Log out</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===== MAIN DASHBOARD CONTENT ===== -->
+    <main class="auth-page" style="min-height: calc(100vh - 250px)">
+      <div class="container">
+        <!-- Welcome Header -->
+        <div class="mb-5">
+          <h1 class="h2 fw-bold">Welcome back, Soham!</h1>
+          <p style="color: #6b6b6b; font-weight: 600">
+            Here is your volunteer dashboard.
+          </p>
+        </div>
+
+        <!-- Empty State Card (No Group) -->
+        <div class="auth-card text-center mx-auto" style="max-width: 500px">
+          <span
+            class="icon-circle mb-3"
+            aria-hidden="true"
+            style="width: 72px; height: 72px"
+          >
+            <!-- Group/Users SVG Icon -->
+            <svg viewBox="0 0 24 24" style="width: 32px; height: 32px">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </span>
+
+          <h2 class="h4 fw-bold mt-2">You haven't joined a group yet.</h2>
+          <p class="mb-4" style="color: #4a4a4a; font-size: 0.95rem">
+            To start viewing and marking your attendance, you need to be part of
+            a volunteer group. Ask your admin for a group code or join an open
+            group.
+          </p>
+
+          <button
+            type="button"
+            class="btn-seva w-100"
+            data-bs-toggle="modal"
+            data-bs-target="#joinGroupModal"
+          >
+            Join a Group
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container">
+        <p class="footer-title">Project by</p>
+        <ul class="footer-team">
+          <li><strong>Soham Phansalkar</strong><span>24070122202</span></li>
+          <li><strong>Shubham Chitrakar</strong><span>24070122195</span></li>
+          <li><strong>Talib Jiruwala</strong><span>24070122215</span></li>
+          <li><strong>Tanmay Sheware</strong><span>24070122216</span></li>
+        </ul>
+        <p class="footer-college">SIT, Pune : CSE C1</p>
+      </div>
+    </footer>
+
+    <!-- WhatsApp button: replace 91XXXXXXXXXX with the real number (country code + number) -->
+    <a
+      class="whatsapp-btn"
+      href="https://wa.me/91XXXXXXXXXX"
+      target="_blank"
+      rel="noopener"
+      aria-label="Chat on WhatsApp"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+        />
+      </svg>
+    </a>
+
+    <!-- Bootstrap Modal for "Join a Group" (Optional UI enhancement) -->
+    <div
+      class="modal fade"
+      id="joinGroupModal"
+      tabindex="-1"
+      aria-labelledby="joinGroupModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div
+          class="modal-content border-0 rounded-0 bg-cream"
+          style="background: var(--cream)"
+        >
+          <div class="modal-header border-0 pb-0">
+            <h1 class="modal-title fs-5 fw-bold" id="joinGroupModalLabel">
+              Join a Volunteer Group
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="groupCode" class="form-label">Group Code</label>
+              <input
+                type="text"
+                class="form-control"
+                id="groupCode"
+                placeholder="Enter the 6-digit code"
+              />
+            </div>
+          </div>
+          <div class="modal-footer border-0 pt-0">
+            <button
+              type="button"
+              class="btn-seva btn-seva--dark"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button type="button" class="btn-seva" data-bs-dismiss="modal">
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,319 @@
+/* ==========================================================
+   SevaDeep shared stylesheet (every page uses this file)
+   ========================================================== */
+
+/* ---------- 1. Colours and fonts (change them here only) ---------- */
+:root {
+  --orange: #e95b2a; /* primary: hero background, main buttons */
+  --crimson: #c82323; /* secondary: icon circles, big numbers */
+  --white: #ffffff; /* navbar */
+  --cream: #fdfbf7; /* main sections */
+  --card: #f3e9e7; /* soft pinkish-grey for cards / image placeholders */
+  --divider: #e5e5e5; /* light gray lines */
+  --text: #222222; /* dark charcoal text */
+  --whatsapp: #25d366;
+
+  --font-sans: "Poppins", sans-serif; /* headings + body */
+  --font-serif: "Playfair Display", serif; /* big statistic numbers only */
+
+  /* Tell Bootstrap to use our look */
+  --bs-body-font-family: var(--font-sans);
+  --bs-body-color: var(--text);
+  --bs-body-bg: var(--cream);
+}
+
+/* ---------- 2. Basics ---------- */
+html {
+  font-size: 14px; /* base text size. Everything else scales from this one number */
+}
+body {
+  font-family: var(--font-sans);
+}
+h1,
+h2,
+h3 {
+  font-weight: 700;
+}
+:focus-visible {
+  outline: 3px solid var(--text);
+  outline-offset: 3px;
+}
+
+/* ---------- 3. Buttons: flat, square corners, white text ---------- */
+.btn-seva {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--orange);
+  color: var(--white);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-seva:hover {
+  background: var(--crimson);
+  color: var(--white);
+}
+.btn-seva--crimson {
+  background: var(--crimson);
+}
+.btn-seva--crimson:hover {
+  background: var(--text);
+}
+.btn-seva--dark {
+  background: var(--text);
+}
+.btn-seva--dark:hover {
+  background: var(--crimson);
+}
+.btn-seva--small {
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
+}
+
+/* ---------- 4. Navbar ---------- */
+.navbar-seva {
+  background: var(--white);
+  border-bottom: 1px solid var(--divider);
+}
+.navbar-brand img {
+  height: 36px;
+  width: auto;
+}
+
+/* ---------- 5. Hero ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--orange);
+  color: var(--white);
+  padding: 2.5rem 0 6rem;
+}
+.hero .container {
+  position: relative; /* keeps text above the faint decorations */
+}
+.hero h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+.hero-text {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* Image with a wavy edge (shape comes from the SVG in index.html) */
+.hero-image {
+  height: clamp(220px, 32vw, 340px);
+  background: var(--card) url("images/hero.jpg") center / cover no-repeat;
+  clip-path: url(#waveMask);
+}
+
+/* Wave at the bottom of the hero. Its fill = colour of the next section */
+.wave {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: clamp(40px, 6vw, 80px);
+}
+.wave path {
+  fill: var(--cream);
+}
+
+/* Faint white line-art decorations */
+.doodle {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  fill: none;
+  stroke: var(--white);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.25;
+}
+.doodle-heart {
+  top: 8%;
+  left: 3%;
+  transform: rotate(-14deg);
+}
+.doodle-spark {
+  bottom: 22%;
+  left: 46%;
+  width: 44px;
+  height: 44px;
+}
+
+/* ---------- 6. Steps ---------- */
+.steps {
+  background: var(--cream);
+  padding: 2.5rem 0 4rem;
+  text-align: center;
+}
+.steps h2 {
+  font-size: 1.5rem;
+}
+.icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--crimson);
+}
+.icon-circle svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: var(--white);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.steps h3 {
+  font-size: 1.05rem;
+  margin: 0.75rem 0 0.35rem;
+}
+
+/* ---------- 7. Footer (project credits) ---------- */
+.footer {
+  background: var(--white);
+  border-top: 1px solid var(--divider);
+  padding: 1.75rem 0;
+  font-size: 0.85rem;
+  text-align: center;
+}
+.footer-title {
+  margin: 0 0 1rem;
+  color: var(--crimson);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+/* Team members: a row of columns that wraps on small screens */
+.footer-team {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+.footer-team strong {
+  display: block;
+  font-weight: 600;
+}
+.footer-team span {
+  color: #6b6b6b;
+}
+/* College line, separated by a thin divider */
+.footer-college {
+  margin: 1.25rem auto 0;
+  padding-top: 1rem;
+  max-width: 720px;
+  border-top: 1px solid var(--divider);
+  font-weight: 600;
+}
+
+/* ---------- 8. WhatsApp floating button ---------- */
+.whatsapp-btn {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 1030;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--whatsapp);
+}
+.whatsapp-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--white);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- 9. Sign-up / log-in pages ---------- */
+.auth-page {
+  background: var(--cream);
+  padding: 2rem 0 3rem;
+}
+.auth-card {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: var(--card);
+}
+.auth-card h1 {
+  font-size: 1.4rem;
+  margin: 0.75rem 0 0.35rem;
+}
+
+/* Form fields: square corners, orange focus ring */
+.form-control,
+.form-select {
+  border-radius: 0;
+  border: 1px solid var(--divider);
+}
+.form-control:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 0.2rem rgba(233, 91, 42, 0.3);
+}
+.form-label {
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Message under the form (errors are crimson) */
+.form-message {
+  min-height: 1.5rem;
+  margin: 0.75rem 0 0;
+  font-weight: 600;
+}
+.form-message.error {
+  color: var(--crimson);
+}
+
+.auth-switch {
+  margin: 1.25rem 0 0;
+  text-align: center;
+}
+.auth-switch a {
+  color: var(--crimson);
+  font-weight: 600;
+}
+
+/* "I'm not a robot" box (fake, only a checkbox) */
+.robot-check {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1rem;
+  background: var(--white);
+  border: 1px solid var(--divider);
+}
+.robot-check input {
+  width: 1.3rem;
+  height: 1.3rem;
+  margin: 0;
+  accent-color: var(--crimson);
+  cursor: pointer;
+}
+.robot-check label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}

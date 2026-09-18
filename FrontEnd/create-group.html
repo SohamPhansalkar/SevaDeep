@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create Group | SevaDeep</title>
+
+    <link rel="icon" type="image/png" href="images/sevadeep-logo.png" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-sm navbar-seva">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="images/sevadeep-logo.png" alt="SevaDeep" />
+        </a>
+        <a href="home.html" class="btn-seva btn-seva--dark btn-seva--small"
+          >Dashboard</a
+        >
+      </div>
+    </nav>
+
+    <main class="auth-page">
+      <div class="container">
+        <div class="auth-card">
+          <!-- Heading with icon in a red circle -->
+          <div class="text-center mb-4">
+            <span class="icon-circle" aria-hidden="true">
+              <!-- User/Group Plus Icon -->
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="8.5" cy="7" r="4" />
+                <line x1="20" y1="8" x2="20" y2="14" />
+                <line x1="23" y1="11" x2="17" y2="11" />
+              </svg>
+            </span>
+            <h1>Create a Group</h1>
+            <p class="mb-0">Start a new volunteer attendance group.</p>
+          </div>
+
+          <!-- Create Group form (frontend only: script.js will handle submission later) -->
+          <form id="createGroupForm">
+            <div class="mb-3">
+              <label for="groupName" class="form-label">Group name</label>
+              <input type="text" class="form-control" id="groupName" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="maxParticipants" class="form-label"
+                >Max participants</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="maxParticipants"
+                min="1"
+                required
+              />
+            </div>
+
+            <!-- Optional Fields -->
+            <div class="mb-3">
+              <label for="schoolName" class="form-label"
+                >School / college name (optional)</label
+              >
+              <input type="text" class="form-control" id="schoolName" />
+            </div>
+
+            <div class="mb-4">
+              <label for="mentorName" class="form-label"
+                >Mentor name (optional)</label
+              >
+              <input type="text" class="form-control" id="mentorName" />
+            </div>
+
+            <button type="submit" class="btn-seva w-100">Create Group</button>
+
+            <!-- Status message container -->
+            <p id="formMessage" class="form-message" role="alert"></p>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container">
+        <p class="footer-title">Project by</p>
+        <ul class="footer-team">
+          <li><strong>Soham Phansalkar</strong><span>24070122202</span></li>
+          <li><strong>Shubham Chitrakar</strong><span>24070122195</span></li>
+          <li><strong>Talib Jiruwala</strong><span>24070122215</span></li>
+          <li><strong>Tanmay Sheware</strong><span>24070122216</span></li>
+        </ul>
+        <p class="footer-college">SIT, Pune : CSE C1</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
