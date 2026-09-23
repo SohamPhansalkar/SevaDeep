@@ -122,16 +122,16 @@
 
     <script>
       (function checkAdminAuth() {
-        const adminUser = "a";
+        const adminUser = "admin";
         const adminPass = "admin";
 
         const inputUser = prompt("Enter Admin Username:");
         const inputPass = prompt("Enter Admin Password:");
 
-        // if (inputUser !== adminUser || inputPass !== adminPass) {
-        //   alert("Access Denied: Incorrect Username or Password!");
-        //   window.location.href = "login.html";
-        // }
+        if (inputUser !== adminUser || inputPass !== adminPass) {
+          alert("Access Denied: Incorrect Username or Password!");
+          window.location.href = "login.html";
+        }
       })();
     </script>
 
