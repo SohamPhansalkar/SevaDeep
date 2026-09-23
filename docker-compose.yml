@@ -1,0 +1,37 @@
+services:
+  # 1. The Database Service
+  db:
+    build: ./Database
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: SevaDeep
+    volumes:
+      # This saves your database data to your Ubuntu server.
+      # Without this, all users and attendance logs would be permanently deleted if the container restarts.
+      - mysql_data:/var/lib/mysql
+
+  # 2. The Backend Service
+  backend:
+    build: ./Backend
+    restart: always
+    env_file:
+      # This pulls in your existing .env file so you don't have to rewrite the credentials
+      - ./Backend/.env
+    depends_on:
+      # Tells Docker not to start FastAPI until the database is booting
+      - db
+
+  # 3. The Frontend Service
+  frontend:
+    build: ./FrontEnd
+    restart: always
+    ports:
+      # Maps your Ubuntu server's port 5500 to Nginx's internal port 80
+      - "1000:80"
+    depends_on:
+      - backend
+
+# Declares the persistent storage volume for the database
+volumes:
+  mysql_data:

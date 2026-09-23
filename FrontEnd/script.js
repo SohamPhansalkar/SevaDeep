@@ -11,7 +11,6 @@ if (!publicPages.includes(currentPage) && !sessionStorage.getItem("userEmail")) 
 }
 
 
-// ----- Sign-up form (frontend only, no backend yet) -----
 const signupForm = document.getElementById("signupForm");
 
 if (signupForm) {
@@ -21,7 +20,6 @@ if (signupForm) {
     messageEl.textContent = "Signing up...";
     messageEl.style.color = "blue";
 
-    // The browser has already checked the required fields, so just collect the values
     const volunteer = {
       firstName: document.getElementById("firstName").value.trim(),
       lastName: document.getElementById("lastName").value.trim(),
@@ -29,11 +27,11 @@ if (signupForm) {
       password: document.getElementById("password").value,
       contactNumber: document.getElementById("contactNumber").value.trim(),
       gender: document.getElementById("gender").value,
-      institution: document.getElementById("institution").value.trim() || null, // optional
+      institution: document.getElementById("institution").value.trim() || null,
     };
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/signup", {
+      const response = await fetch("/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -59,22 +57,19 @@ if (signupForm) {
   });
 }
 
-// ----- Log-in form (frontend only, no backend yet) -----
 const loginForm = document.getElementById("loginForm");
 
 if (loginForm) {
   loginForm.addEventListener("submit", async function (event) {
-    event.preventDefault(); // stop the page from reloading
+    event.preventDefault();
     const messageEl = document.getElementById("formMessage");
     messageEl.textContent = "Logging in...";
     messageEl.style.color = "blue";
-
-    // The browser has already checked email, password and the "not a robot" box
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/login", {
+      const response = await fetch("/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -124,7 +119,7 @@ if (createGroupForm) {
     };
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/create-group", {
+      const response = await fetch("/api/create-group", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -159,13 +154,11 @@ if (dashboardContent) {
   const groupId = sessionStorage.getItem("groupId");
   const userEmail = sessionStorage.getItem("userEmail");
 
-  // Show logged-in user's name in welcome header
   const welcomeNameEl = document.getElementById("welcomeName");
   if (welcomeNameEl && userEmail) {
     welcomeNameEl.textContent = userEmail.split("@")[0];
   }
 
-  // Logout button clears storage and redirects
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", function (e) {
@@ -205,7 +198,7 @@ if (dashboardContent) {
       }
 
       try {
-        const response = await fetch("http://127.0.0.1:8000/join-group", {
+        const response = await fetch("/api/join-group", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -228,8 +221,7 @@ if (dashboardContent) {
       }
     });
   } else {
-    // Fetch group details from backend
-    fetch(`http://127.0.0.1:8000/group/${groupId}/details`)
+    fetch(`/api/group/${groupId}/details`)
       .then(async (res) => {
         if (!res.ok) {
           const err = await res.json();
@@ -368,7 +360,7 @@ if (attendanceForm) {
     };
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/add-attendance", {
+      const response = await fetch("/api/add-attendance", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -400,8 +392,7 @@ const volunteerSearchInput = document.getElementById("volunteerSearchInput");
 const totalGroupsBadge = document.getElementById("totalGroupsBadge");
 
 if (groupsAccordion && volunteersTableBody) {
-  // Fetch groups
-  fetch("http://127.0.0.1:8000/admin/groups")
+  fetch("/api/admin/groups")
     .then(res => res.json())
     .then(groups => {
       if(totalGroupsBadge) {
@@ -477,7 +468,7 @@ if (groupsAccordion && volunteersTableBody) {
     }).join("");
   };
 
-  fetch("http://127.0.0.1:8000/admin/users")
+  fetch("/api/admin/users")
     .then(res => res.json())
     .then(users => {
       allUsers = users;
@@ -514,7 +505,7 @@ if (userInfoContent) {
         <a href="admin.html" class="btn-seva btn-seva--small mt-3">Back to Admin Panel</a>
       </div>`;
   } else {
-    fetch(`http://127.0.0.1:8000/admin/user/${encodeURIComponent(emailParam)}`)
+    fetch(`/api/admin/user/${encodeURIComponent(emailParam)}`)
       .then(async (res) => {
         if (!res.ok) {
           const err = await res.json();

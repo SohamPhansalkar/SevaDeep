@@ -133,19 +133,19 @@ VALUES
     
 -- select --------
     
-select * from users;
-select * from grps;
+-- select * from users;
+-- select * from grps;
 
-SELECT 
-    CONCAT(u.firstName, ' ', u.lastName) AS userName,
-    g.name AS grpName
-FROM grpMembers gm
-JOIN users u 
-    ON gm.userId = u.id
-JOIN grps g 
-    ON gm.grpId = g.id;
+-- SELECT 
+--     CONCAT(u.firstName, ' ', u.lastName) AS userName,
+--     g.name AS grpName
+-- FROM grpMembers gm
+-- JOIN users u 
+--     ON gm.userId = u.id
+-- JOIN grps g 
+--     ON gm.grpId = g.id;
     
-    select * from attendance;
+--     select * from attendance;
     
     
     
