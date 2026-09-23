@@ -31,7 +31,7 @@ if (signupForm) {
     };
 
     try {
-      const response = await fetch("/api/signup", {
+      const response = await fetch("/sevadeep/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -69,7 +69,7 @@ if (loginForm) {
     const password = document.getElementById("password").value;
 
     try {
-      const response = await fetch("/api/login", {
+      const response = await fetch("/sevadeep/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -119,7 +119,7 @@ if (createGroupForm) {
     };
 
     try {
-      const response = await fetch("/api/create-group", {
+      const response = await fetch("/sevadeep/api/create-group", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -198,7 +198,7 @@ if (dashboardContent) {
       }
 
       try {
-        const response = await fetch("/api/join-group", {
+        const response = await fetch("/sevadeep/api/join-group", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -221,7 +221,7 @@ if (dashboardContent) {
       }
     });
   } else {
-    fetch(`/api/group/${groupId}/details`)
+    fetch(`/sevadeep/api/group/${groupId}/details`)
       .then(async (res) => {
         if (!res.ok) {
           const err = await res.json();
@@ -361,7 +361,7 @@ if (attendanceForm) {
     };
 
     try {
-      const response = await fetch("/api/add-attendance", {
+      const response = await fetch("/sevadeep/api/add-attendance", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -393,7 +393,7 @@ const volunteerSearchInput = document.getElementById("volunteerSearchInput");
 const totalGroupsBadge = document.getElementById("totalGroupsBadge");
 
 if (groupsAccordion && volunteersTableBody) {
-  fetch("/api/admin/groups")
+  fetch("/sevadeep/api/admin/groups")
     .then(res => res.json())
     .then(groups => {
       if(totalGroupsBadge) {
@@ -469,7 +469,7 @@ if (groupsAccordion && volunteersTableBody) {
     }).join("");
   };
 
-  fetch("/api/admin/users")
+  fetch("/sevadeep/api/admin/users")
     .then(res => res.json())
     .then(users => {
       allUsers = users;
@@ -506,7 +506,7 @@ if (userInfoContent) {
         <a href="admin.html" class="btn-seva btn-seva--small mt-3">Back to Admin Panel</a>
       </div>`;
   } else {
-    fetch(`/api/admin/user/${encodeURIComponent(emailParam)}`)
+    fetch(`/sevadeep/api/admin/user/${encodeURIComponent(emailParam)}`)
       .then(async (res) => {
         if (!res.ok) {
           const err = await res.json();
