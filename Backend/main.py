@@ -25,9 +25,13 @@ app.add_middleware(
 
 from signUp import router as signup_router
 from LogIn import router as login_router
+from groupDetails import router as groupdetails_router
+from createGroup import router as creategroup_router
 
 app.include_router(signup_router)
 app.include_router(login_router)
+app.include_router(creategroup_router)
+app.include_router(groupdetails_router)
 
 
 
