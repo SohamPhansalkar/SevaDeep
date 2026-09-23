@@ -7,7 +7,9 @@ CREATE TABLE users(
     phoneNumber VARCHAR(15) UNIQUE,
     password VARCHAR(100) NOT NULL,
     firstName VARCHAR(50),
-    lastName VARCHAR(50)
+    lastName VARCHAR(50),
+    gender VARCHAR(20),
+    institution VARCHAR(255)
 );
 
 CREATE TABLE grps(

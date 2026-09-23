@@ -6,11 +6,25 @@ import tables
 import schemas
 from DBConnection import get_db
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(
     title="SevaDeep API",
     description="Backend service for SevaDeep NGO Attendance Logging System",
     version="0.1.0",
 )
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # In production, restrict this to your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+from signUp import router as signup_router
+app.include_router(signup_router)
 
 
 @app.get("/")

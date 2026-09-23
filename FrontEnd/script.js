@@ -5,23 +5,46 @@
 const signupForm = document.getElementById("signupForm");
 
 if (signupForm) {
-  signupForm.addEventListener("submit", function (event) {
+  signupForm.addEventListener("submit", async function (event) {
     event.preventDefault(); // stop the page from reloading
+    const messageEl = document.getElementById("formMessage");
+    messageEl.textContent = "Signing up...";
+    messageEl.style.color = "blue";
 
     // The browser has already checked the required fields, so just collect the values
     const volunteer = {
       firstName: document.getElementById("firstName").value.trim(),
       lastName: document.getElementById("lastName").value.trim(),
       email: document.getElementById("email").value.trim(),
+      password: document.getElementById("password").value,
       contactNumber: document.getElementById("contactNumber").value.trim(),
       gender: document.getElementById("gender").value,
-      institution: document.getElementById("institution").value.trim(), // optional, can be empty
+      institution: document.getElementById("institution").value.trim() || null, // optional
     };
 
-    console.log(volunteer); // TODO (later): send this to the Python backend
+    try {
+      const response = await fetch("http://127.0.0.1:8000/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(volunteer)
+      });
 
-    document.getElementById("formMessage").textContent =
-      "Form is valid. Backend is not connected yet.";
+      if (response.ok) {
+        messageEl.style.color = "green";
+        messageEl.textContent = "Sign up successful! You can now log in.";
+        signupForm.reset();
+      } else {
+        const errorData = await response.json();
+        messageEl.style.color = "red";
+        messageEl.textContent = "Error: " + (errorData.detail || "Sign up failed");
+      }
+    } catch (error) {
+      console.error(error);
+      messageEl.style.color = "red";
+      messageEl.textContent = "Error connecting to the server.";
+    }
   });
 }
 

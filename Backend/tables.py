@@ -12,6 +12,8 @@ class User(Base):
     password = Column(String(100), nullable=False)
     firstName = Column(String(50))
     lastName = Column(String(50))
+    gender = Column(String(20))
+    institution = Column(String(255))
 
     # Relationships
     groups_created = relationship("Group", back_populates="creator")
