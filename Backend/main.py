@@ -24,7 +24,11 @@ app.add_middleware(
 )
 
 from signUp import router as signup_router
+from LogIn import router as login_router
+
 app.include_router(signup_router)
+app.include_router(login_router)
+
 
 
 @app.get("/")

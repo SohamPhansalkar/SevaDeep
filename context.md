@@ -32,6 +32,6 @@ The frontend is located in the `FrontEnd/` directory and consists of vanilla web
 
 ## 🚀 Next Steps / Missing Features
 To make the application fully functional, the following steps are needed:
-1. **Build Backend Routes**: Create `POST` endpoints in FastAPI for `/signup`, `/login`, `/attendance`, and `/group`.
-2. **Connect the Frontend**: Update `script.js` to use the `fetch()` API so that when a user clicks "Sign Up" or "Login", it actually sends that data to the FastAPI backend to be saved in the MySQL database.
-3. **Authentication**: Implement JWT (JSON Web Tokens) or session cookies in the backend so users stay logged in across different pages.
+1. **Build Backend Routes**: Built `POST /signup` and `POST /login` endpoints. Remaining endpoints needed: `/attendance` and `/group`.
+2. **Connect the Frontend**: `signUp.html` has been wired up using `fetch()`. Next is to connect `login.html`, `home.html`, etc.
+3. **Authentication**: Implement JWT (JSON Web Tokens) or session cookies in the backend so users stay logged in across different pages. Currently, `/login` just returns user data on success.

@@ -26,6 +26,11 @@ class UserCreate(BaseModel):
     password: str
 
 
+class UserLogin(BaseModel):
+    email: str
+    password: str
+
+
 class GroupResponse(BaseModel):
     id: int
     name: str

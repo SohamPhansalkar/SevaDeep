@@ -1,6 +1,16 @@
 // Shared script for all SevaDeep pages.
 // Each block only runs on the page that has that form.
 
+// ----- Authentication Check -----
+const currentPage = window.location.pathname.split("/").pop().toLowerCase();
+const publicPages = ["index.html", "login.html", "signup.html", ""];
+
+// Redirect to index.html if user is trying to access a protected page without being logged in
+if (!publicPages.includes(currentPage) && !localStorage.getItem("userEmail")) {
+    window.location.href = "index.html";
+}
+
+
 // ----- Sign-up form (frontend only, no backend yet) -----
 const signupForm = document.getElementById("signupForm");
 
@@ -52,15 +62,41 @@ if (signupForm) {
 const loginForm = document.getElementById("loginForm");
 
 if (loginForm) {
-  loginForm.addEventListener("submit", function (event) {
+  loginForm.addEventListener("submit", async function (event) {
     event.preventDefault(); // stop the page from reloading
+    const messageEl = document.getElementById("formMessage");
+    messageEl.textContent = "Logging in...";
+    messageEl.style.color = "blue";
 
     // The browser has already checked email, password and the "not a robot" box
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
 
-    // TODO (later): send email and password to the Python backend
-    document.getElementById("formMessage").textContent =
-      "Form is valid. Backend is not connected yet.";
+    try {
+      const response = await fetch("http://127.0.0.1:8000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      if (response.ok) {
+        const userData = await response.json();
+        messageEl.style.color = "green";
+        messageEl.textContent = "Login successful! Welcome " + userData.firstName + ".";
+        
+        localStorage.setItem("userEmail", userData.email);
+        window.location.href = "home.html";
+      } else {
+        const errorData = await response.json();
+        messageEl.style.color = "red";
+        messageEl.textContent = "Error: " + (errorData.detail || "Login failed");
+      }
+    } catch (error) {
+      console.error(error);
+      messageEl.style.color = "red";
+      messageEl.textContent = "Error connecting to the server.";
+    }
   });
 }
