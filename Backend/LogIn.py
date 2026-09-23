@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
 import tables
 import schemas
@@ -24,6 +25,13 @@ def login(user_credentials: schemas.UserLogin, db: Session = Depends(get_db)):
             status_code=status.HTTP_401_UNAUTHORIZED, 
             detail="Invalid Credentials"
         )
-        
-    # Login successful, return the user info (password is hidden by UserResponse schema)
-    return user
+    
+    # Look up the user's group membership
+    membership = db.query(tables.GroupMember).filter(tables.GroupMember.userId == user.id).first()
+    
+    # Build response with groupId (None if user hasn't joined a group yet)
+    response = schemas.UserResponse.model_validate(user)
+    if membership:
+        response.groupId = membership.grpId
+    
+    return response

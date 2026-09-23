@@ -11,6 +11,7 @@ class UserResponse(BaseModel):
     lastName: Optional[str] = None
     gender: Optional[str] = None
     institution: Optional[str] = None
+    groupId: Optional[int] = None
 
     class Config:
         from_attributes = True

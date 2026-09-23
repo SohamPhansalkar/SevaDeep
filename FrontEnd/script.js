@@ -6,7 +6,7 @@ const currentPage = window.location.pathname.split("/").pop().toLowerCase();
 const publicPages = ["index.html", "login.html", "signup.html", ""];
 
 // Redirect to index.html if user is trying to access a protected page without being logged in
-if (!publicPages.includes(currentPage) && !localStorage.getItem("userEmail")) {
+if (!publicPages.includes(currentPage) && !sessionStorage.getItem("userEmail")) {
     window.location.href = "index.html";
 }
 
@@ -45,6 +45,7 @@ if (signupForm) {
         messageEl.style.color = "green";
         messageEl.textContent = "Sign up successful! You can now log in.";
         signupForm.reset();
+        window.location.href = "login.html";
       } else {
         const errorData = await response.json();
         messageEl.style.color = "red";
@@ -86,7 +87,10 @@ if (loginForm) {
         messageEl.style.color = "green";
         messageEl.textContent = "Login successful! Welcome " + userData.firstName + ".";
         
-        localStorage.setItem("userEmail", userData.email);
+        sessionStorage.setItem("userEmail", userData.email);
+        if (userData.groupId) {
+          sessionStorage.setItem("groupId", userData.groupId);
+        }
         window.location.href = "home.html";
       } else {
         const errorData = await response.json();
@@ -116,7 +120,7 @@ if (createGroupForm) {
       maxSize: parseInt(document.getElementById("maxParticipants").value),
       clgName: document.getElementById("schoolName").value.trim() || null,
       mentorName: document.getElementById("mentorName").value.trim() || null,
-      creatorEmail: localStorage.getItem("userEmail") // Send the logged-in user's email
+      creatorEmail: sessionStorage.getItem("userEmail")
     };
 
     try {
@@ -153,7 +157,7 @@ const dashboardContent = document.getElementById("dashboardContent");
 
 if (dashboardContent) {
   const groupId = sessionStorage.getItem("groupId");
-  const userEmail = localStorage.getItem("userEmail");
+  const userEmail = sessionStorage.getItem("userEmail");
 
   // Show logged-in user's name in welcome header
   const welcomeNameEl = document.getElementById("welcomeName");
@@ -166,7 +170,7 @@ if (dashboardContent) {
   if (logoutBtn) {
     logoutBtn.addEventListener("click", function (e) {
       e.preventDefault();
-      localStorage.removeItem("userEmail");
+      sessionStorage.removeItem("userEmail");
       sessionStorage.removeItem("groupId");
       window.location.href = "index.html";
     });
@@ -188,8 +192,41 @@ if (dashboardContent) {
         <p class="mb-4" style="color:#4a4a4a;font-size:0.95rem">
           To start viewing and marking attendance, create or join a volunteer group.
         </p>
-        <a href="create-group.html" class="btn-seva w-100">Create a Group</a>
+        <input type="text" id="groupIdInput" class="form-control mb-2" placeholder="Enter Group ID">
+        <button id="joinGroupBtn" class="btn-seva w-100">Join a Group</button>
       </div>`;
+
+    // Attach join group button handler
+    document.getElementById("joinGroupBtn").addEventListener("click", async function () {
+      const groupIdInput = document.getElementById("groupIdInput").value.trim();
+      if (!groupIdInput) {
+        alert("Please enter a Group ID.");
+        return;
+      }
+
+      try {
+        const response = await fetch("http://127.0.0.1:8000/join-group", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            groupId: parseInt(groupIdInput),
+            userEmail: sessionStorage.getItem("userEmail")
+          })
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          sessionStorage.setItem("groupId", result.id);
+          window.location.reload(); // reload to show group dashboard
+        } else {
+          const errorData = await response.json();
+          alert("Error: " + (errorData.detail || "Failed to join group"));
+        }
+      } catch (error) {
+        console.error(error);
+        alert("Error connecting to the server.");
+      }
+    });
   } else {
     // Fetch group details from backend
     fetch(`http://127.0.0.1:8000/group/${groupId}/details`)

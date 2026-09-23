@@ -1,5 +1,6 @@
 from typing import List
 from fastapi import Depends, FastAPI, HTTPException
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
 
 import tables 
@@ -14,10 +15,9 @@ app = FastAPI(
     version="0.1.0",
 )
 
-# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # In production, restrict this to your frontend URL
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -27,11 +27,13 @@ from signUp import router as signup_router
 from LogIn import router as login_router
 from groupDetails import router as groupdetails_router
 from createGroup import router as creategroup_router
+from joinGroup import router as joingroup_router
 
 app.include_router(signup_router)
 app.include_router(login_router)
 app.include_router(creategroup_router)
 app.include_router(groupdetails_router)
+app.include_router(joingroup_router)
 
 
 
