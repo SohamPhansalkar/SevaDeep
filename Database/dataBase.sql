@@ -1,4 +1,4 @@
-CREATE DATABASE SevaDeep;
+-- CREATE DATABASE SevaDeep;
 USE SevaDeep;
 
 CREATE TABLE users(

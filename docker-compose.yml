@@ -6,10 +6,10 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: SevaDeep
-    volumes:
-      # This saves your database data to your Ubuntu server.
-      # Without this, all users and attendance logs would be permanently deleted if the container restarts.
-      - mysql_data:/var/lib/mysql
+    # volumes:
+    #   # This saves your database data to your Ubuntu server.
+    #   # Without this, all users and attendance logs would be permanently deleted if the container restarts.
+    #   - mysql_data:/var/lib/mysql
 
   # 2. The Backend Service
   backend:

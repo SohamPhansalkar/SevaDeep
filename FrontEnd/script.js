@@ -295,7 +295,8 @@ if (dashboardContent) {
                 <p class="mb-0" style="color:#6b6b6b;font-size:0.9rem">
                   ${group.clgName ? `<strong>Institution:</strong> ${group.clgName} &nbsp;|&nbsp;` : ""}
                   ${group.mentorName ? `<strong>Mentor:</strong> ${group.mentorName} &nbsp;|&nbsp;` : ""}
-                  <strong>Members:</strong> ${group.memberCount} / ${group.maxSize}
+                  <strong>Members:</strong> ${group.memberCount} / ${group.maxSize} &nbsp;|&nbsp;
+                  <strong>Group Code:</strong> ${groupId}
                 </p>
               </div>
               <a href="add-attendance.html" class="btn-seva btn-seva--small">+ Add Attendance</a>
@@ -525,6 +526,7 @@ if (userInfoContent) {
               <p class="mb-1"><strong>Institution:</strong> ${user.groupInfo.clgName || "—"}</p>
               <p class="mb-1"><strong>Mentor:</strong> ${user.groupInfo.mentorName || "—"}</p>
               <p class="mb-0"><strong>Members:</strong> ${user.groupInfo.memberCount} / ${user.groupInfo.maxSize}</p>
+              <p class="mb-0"><strong>Group Code:</strong> ${user.groupInfo.groupId}</p>
             </div>
           `;
         } else {
