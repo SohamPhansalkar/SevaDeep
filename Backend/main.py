@@ -28,12 +28,14 @@ from LogIn import router as login_router
 from groupDetails import router as groupdetails_router
 from createGroup import router as creategroup_router
 from joinGroup import router as joingroup_router
+from addAttendance import router as addattendance_router
 
 app.include_router(signup_router)
 app.include_router(login_router)
 app.include_router(creategroup_router)
 app.include_router(groupdetails_router)
 app.include_router(joingroup_router)
+app.include_router(addattendance_router)
 
 
 

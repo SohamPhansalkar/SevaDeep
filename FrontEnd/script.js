@@ -250,10 +250,49 @@ if (dashboardContent) {
               <td>${m.gender || "—"}</td>
               <td>${m.institution || "—"}</td>
               <td><span class="badge" style="background:var(--crimson);color:#fff">${sessions}</span></td>
-              <td>${totalDuration} min</td>
+              <td>${(totalDuration / 60).toFixed(1)} Hr</td>
               <td>${lastDate}</td>
             </tr>`;
         }).join("");
+
+        // Find logged-in user to show their specific records
+        const loggedInEmail = sessionStorage.getItem("userEmail");
+        const currentUser = group.members.find(m => m.email === loggedInEmail);
+        
+        let personalRecordsHtml = "";
+        if (currentUser) {
+          const recordRows = currentUser.attendances.map(a => {
+            return `
+              <tr>
+                <td>${a.date}</td>
+                <td>${a.activityName || "—"}</td>
+                <td>${(a.duration / 60).toFixed(1)} Hr</td>
+                <td>${a.note || "—"}</td>
+              </tr>`;
+          }).join("");
+
+          personalRecordsHtml = `
+            <div style="background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.07);overflow:hidden;margin-top:2rem;">
+              <div style="padding:1.25rem 2rem 0.75rem;">
+                <h3 class="h5 fw-bold mb-0">My Attendance Records</h3>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-hover mb-0" style="font-size:0.9rem">
+                  <thead style="background:var(--cream)">
+                    <tr>
+                      <th>Date</th>
+                      <th>Activity Name</th>
+                      <th>Duration</th>
+                      <th>Note</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${recordRows || `<tr><td colspan="4" class="text-center text-muted py-4">No attendance records yet.</td></tr>`}
+                  </tbody>
+                </table>
+              </div>
+            </div>`;
+        }
 
         dashboardContent.innerHTML = `
           <!-- Group Info Card -->
@@ -294,7 +333,11 @@ if (dashboardContent) {
                 </tbody>
               </table>
             </div>
-          </div>`;
+          </div>
+          
+          <!-- Personal Records Table -->
+          ${personalRecordsHtml}
+        `;
       })
       .catch((err) => {
         dashboardContent.innerHTML = `
@@ -304,4 +347,48 @@ if (dashboardContent) {
           </div>`;
       });
   }
+}
+
+// ----- Add Attendance form -----
+const attendanceForm = document.getElementById("attendanceForm");
+
+if (attendanceForm) {
+  attendanceForm.addEventListener("submit", async function (event) {
+    event.preventDefault(); // stop the page from reloading
+    const messageEl = document.getElementById("formMessage");
+    messageEl.textContent = "Submitting attendance...";
+    messageEl.style.color = "blue";
+
+    const attendanceData = {
+      userEmail: sessionStorage.getItem("userEmail"),
+      date: document.getElementById("activityDate").value,
+      duration: parseFloat(document.getElementById("hoursWorked").value),
+      activityName: document.getElementById("activityName").value.trim(),
+      note: document.getElementById("activityNote").value.trim() || null
+    };
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/add-attendance", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(attendanceData)
+      });
+
+      if (response.ok) {
+        messageEl.style.color = "green";
+        messageEl.textContent = "Attendance submitted successfully!";
+        attendanceForm.reset();
+      } else {
+        const errorData = await response.json();
+        messageEl.style.color = "red";
+        messageEl.textContent = "Error: " + (errorData.detail || "Failed to submit attendance");
+      }
+    } catch (error) {
+      console.error(error);
+      messageEl.style.color = "red";
+      messageEl.textContent = "Error connecting to the server.";
+    }
+  });
 }

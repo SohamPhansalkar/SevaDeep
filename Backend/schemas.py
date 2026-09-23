@@ -57,13 +57,20 @@ class GroupCreate(BaseModel):
 class AttendanceResponse(BaseModel):
     id: int
     userId: int
-    date: str  # ISO format
+    date: date
     duration: Optional[int] = None
     activityName: Optional[str] = None
     note: Optional[str] = None
 
     class Config:
         from_attributes = True
+
+class AttendanceCreate(BaseModel):
+    userEmail: str
+    date: date
+    duration: float
+    activityName: str
+    note: Optional[str] = None
 
 class MemberWithAttendance(UserResponse):
     attendances: list[AttendanceResponse] = []
