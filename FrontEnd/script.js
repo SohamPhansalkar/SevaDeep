@@ -392,3 +392,228 @@ if (attendanceForm) {
     }
   });
 }
+
+// ----- Admin Dashboard -----
+const groupsAccordion = document.getElementById("groupsAccordion");
+const volunteersTableBody = document.getElementById("volunteersTableBody");
+const volunteerSearchInput = document.getElementById("volunteerSearchInput");
+const totalGroupsBadge = document.getElementById("totalGroupsBadge");
+
+if (groupsAccordion && volunteersTableBody) {
+  // Fetch groups
+  fetch("http://127.0.0.1:8000/admin/groups")
+    .then(res => res.json())
+    .then(groups => {
+      if(totalGroupsBadge) {
+        totalGroupsBadge.textContent = `Total Groups: ${groups.length}`;
+      }
+      
+      const groupsHtml = groups.map((group, index) => {
+        const collapseId = `collapseGroup${index}`;
+        const headingId = `headingGroup${index}`;
+        
+        const memberRows = group.members.map(m => {
+          const totalDuration = m.attendances.reduce((sum, a) => sum + (a.duration || 0), 0);
+          return `
+            <tr>
+              <td>${m.firstName || ""} ${m.lastName || ""}</td>
+              <td>${m.email}</td>
+              <td>${(totalDuration / 60).toFixed(1)} hrs</td>
+            </tr>
+          `;
+        }).join("");
+
+        return `
+          <div class="accordion-item rounded-0 border-0 mb-2">
+            <h2 class="accordion-header" id="${headingId}">
+              <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="false" aria-controls="${collapseId}">
+                ${group.name} (${group.memberCount} / ${group.maxSize} Participants)
+              </button>
+            </h2>
+            <div id="${collapseId}" class="accordion-collapse collapse" aria-labelledby="${headingId}" data-bs-parent="#groupsAccordion">
+              <div class="accordion-body bg-white">
+                <p class="small text-muted mb-2">
+                  <strong>Institution:</strong> ${group.clgName || "—"} |
+                  <strong>Mentor:</strong> ${group.mentorName || "—"}
+                </p>
+                <table class="table table-sm table-hover mb-0">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Total Hours</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${memberRows || '<tr><td colspan="3" class="text-center text-muted">No members in this group</td></tr>'}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+      
+      groupsAccordion.innerHTML = groupsHtml;
+    })
+    .catch(err => console.error("Error fetching admin groups:", err));
+
+  // Fetch users
+  let allUsers = [];
+  
+  const renderUsers = (users) => {
+    volunteersTableBody.innerHTML = users.map(user => {
+      return `
+        <tr>
+          <td><strong>${user.firstName || ""} ${user.lastName || ""}</strong></td>
+          <td>${user.email}</td>
+          <td>${user.contactNumber || user.phoneNumber || "—"}</td>
+          <td>${user.groupName || "—"}</td>
+          <td>
+            <a href="userInfo.html?userEmail=${encodeURIComponent(user.email)}" class="btn-seva btn-seva--small" style="background-color: var(--primary); color: #000000ff; text-decoration: none;">More Info</a>
+          </td>
+        </tr>
+      `;
+    }).join("");
+  };
+
+  fetch("http://127.0.0.1:8000/admin/users")
+    .then(res => res.json())
+    .then(users => {
+      allUsers = users;
+      renderUsers(allUsers);
+    })
+    .catch(err => console.error("Error fetching admin users:", err));
+
+  // Handle Search
+  if (volunteerSearchInput) {
+    volunteerSearchInput.addEventListener("input", (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      const filtered = allUsers.filter(user => {
+        const fullName = `${user.firstName || ""} ${user.lastName || ""}`.toLowerCase();
+        const email = (user.email || "").toLowerCase();
+        const groupName = (user.groupName || "").toLowerCase();
+        return fullName.includes(searchTerm) || email.includes(searchTerm) || groupName.includes(searchTerm);
+      });
+      renderUsers(filtered);
+    });
+  }
+}
+
+// ----- User Info Dashboard (Admin) -----
+const userInfoContent = document.getElementById("userInfoContent");
+
+if (userInfoContent) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const emailParam = urlParams.get("userEmail");
+
+  if (!emailParam) {
+    userInfoContent.innerHTML = `
+      <div class="auth-card text-center" style="color:var(--crimson)">
+        <p class="fw-semibold mb-2">⚠ No user specified.</p>
+        <a href="admin.html" class="btn-seva btn-seva--small mt-3">Back to Admin Panel</a>
+      </div>`;
+  } else {
+    fetch(`http://127.0.0.1:8000/admin/user/${encodeURIComponent(emailParam)}`)
+      .then(async (res) => {
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.detail || "Failed to load user info");
+        }
+        return res.json();
+      })
+      .then(user => {
+        const totalDuration = user.attendances.reduce((sum, a) => sum + (a.duration || 0), 0);
+        
+        let groupHtml = "";
+        if (user.groupInfo) {
+          groupHtml = `
+            <div class="card p-4 border-0 shadow-sm mb-4" style="background: var(--card)">
+              <h2 class="h5 fw-bold mb-3">Group Information</h2>
+              <p class="mb-1"><strong>Group Name:</strong> ${user.groupInfo.name}</p>
+              <p class="mb-1"><strong>Institution:</strong> ${user.groupInfo.clgName || "—"}</p>
+              <p class="mb-1"><strong>Mentor:</strong> ${user.groupInfo.mentorName || "—"}</p>
+              <p class="mb-0"><strong>Members:</strong> ${user.groupInfo.memberCount} / ${user.groupInfo.maxSize}</p>
+            </div>
+          `;
+        } else {
+          groupHtml = `
+            <div class="card p-4 border-0 shadow-sm mb-4" style="background: var(--card)">
+              <h2 class="h5 fw-bold mb-3">Group Information</h2>
+              <p class="text-muted mb-0">This user has not joined any group yet.</p>
+            </div>
+          `;
+        }
+
+        const attendanceRows = user.attendances.map(a => {
+          return `
+            <tr>
+              <td>${a.date}</td>
+              <td>${a.activityName || "—"}</td>
+              <td>${(a.duration / 60).toFixed(1)} Hr</td>
+              <td>${a.note || "—"}</td>
+            </tr>
+          `;
+        }).join("");
+
+        userInfoContent.innerHTML = `
+          <div class="d-flex align-items-center gap-3 mb-4">
+            <span class="icon-circle" aria-hidden="true" style="width: 50px; height: 50px;">
+              <svg viewBox="0 0 24 24" style="width: 24px; height: 24px;">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </span>
+            <div>
+              <h1 class="h3 mb-0">${user.firstName || ""} ${user.lastName || ""}</h1>
+              <p class="text-muted mb-0">${user.email}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card p-4 border-0 shadow-sm mb-4" style="background: var(--card)">
+                <h2 class="h5 fw-bold mb-3">Profile Details</h2>
+                <p class="mb-1"><strong>Contact Number:</strong> ${user.contactNumber || user.phoneNumber || "—"}</p>
+                <p class="mb-1"><strong>Gender:</strong> ${user.gender || "—"}</p>
+                <p class="mb-0"><strong>Institution:</strong> ${user.institution || "—"}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              ${groupHtml}
+            </div>
+          </div>
+
+          <div class="card p-4 border-0 shadow-sm" style="background: var(--card)">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h2 class="h5 fw-bold mb-0">Attendance History</h2>
+              <span class="badge" style="background:var(--crimson);color:#fff">Total: ${(totalDuration / 60).toFixed(1)} Hrs</span>
+            </div>
+            <div class="table-responsive bg-white rounded">
+              <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                  <tr>
+                    <th>Date</th>
+                    <th>Activity Name</th>
+                    <th>Duration</th>
+                    <th>Note</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${attendanceRows || '<tr><td colspan="4" class="text-center text-muted py-4">No attendance records found.</td></tr>'}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      })
+      .catch(err => {
+        userInfoContent.innerHTML = `
+          <div class="auth-card text-center" style="color:var(--crimson)">
+            <p class="fw-semibold mb-2">⚠ Error loading user info.</p>
+            <p style="font-size:0.875rem">${err.message}</p>
+            <a href="admin.html" class="btn-seva btn-seva--small mt-3">Back to Admin Panel</a>
+          </div>`;
+      });
+  }
+}

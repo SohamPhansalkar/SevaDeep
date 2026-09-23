@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>User Information | SevaDeep</title>
+    <link rel="icon" type="image/png" href="images/sevadeep-logo.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-sm navbar-seva">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="images/sevadeep-logo.png" alt="SevaDeep" />
+        </a>
+        <div class="d-flex align-items-center gap-3">
+          <span class="badge bg-danger">Admin Portal</span>
+          <a href="admin.html" class="btn-seva btn-seva--small" style="background-color: var(--primary); color: #fff;">Back to Admin</a>
+          <a href="login.html" class="btn-seva btn-seva--dark btn-seva--small">Log out</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="auth-page py-4">
+      <div class="container" style="max-width: 960px" id="userInfoContent">
+        <div class="text-center py-5">
+            <div class="spinner-border text-danger" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Loading user information...</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container">
+        <p class="footer-title">Project by</p>
+        <ul class="footer-team">
+          <li><strong>Soham Phansalkar</strong><span>24070122202</span></li>
+          <li><strong>Shubham Chitrakar</strong><span>24070122195</span></li>
+          <li><strong>Talib Jiruwala</strong><span>24070122215</span></li>
+          <li><strong>Tanmay Sheware</strong><span>24070122216</span></li>
+        </ul>
+        <p class="footer-college">SIT, Pune : CSE C1</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </body>
+</html>

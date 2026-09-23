@@ -63,159 +63,11 @@
         >
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h2 class="h4 mb-0">Volunteer Groups</h2>
-            <span class="badge bg-secondary">Total Groups: 3</span>
+            <span class="badge bg-secondary" id="totalGroupsBadge">Total Groups: 0</span>
           </div>
 
           <div class="accordion" id="groupsAccordion">
-            <!-- Group 1 -->
-            <div class="accordion-item rounded-0 border-0 mb-2">
-              <h2 class="accordion-header" id="headingOne">
-                <button
-                  class="accordion-button collapsed fw-bold"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne"
-                  aria-expanded="false"
-                  aria-controls="collapseOne"
-                >
-                  Food Distribution - Team Alpha (12 / 15 Participants)
-                </button>
-              </h2>
-              <div
-                id="collapseOne"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingOne"
-                data-bs-parent="#groupsAccordion"
-              >
-                <div class="accordion-body bg-white">
-                  <p class="small text-muted mb-2">
-                    <strong>Institution:</strong> SIT Pune |
-                    <strong>Mentor:</strong> Prof. Sharma
-                  </p>
-                  <table class="table table-sm table-hover mb-0">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Total Hours</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Soham Phansalkar</td>
-                        <td>soham@example.com</td>
-                        <td>24 hrs</td>
-                      </tr>
-                      <tr>
-                        <td>Shubham Chitrakar</td>
-                        <td>shubham@example.com</td>
-                        <td>18 hrs</td>
-                      </tr>
-                      <tr>
-                        <td>Talib Jiruwala</td>
-                        <td>talib@example.com</td>
-                        <td>20 hrs</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-
-            <!-- Group 2 -->
-            <div class="accordion-item rounded-0 border-0 mb-2">
-              <h2 class="accordion-header" id="headingTwo">
-                <button
-                  class="accordion-button collapsed fw-bold"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo"
-                >
-                  Teaching Support - Team Beta (8 / 10 Participants)
-                </button>
-              </h2>
-              <div
-                id="collapseTwo"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingTwo"
-                data-bs-parent="#groupsAccordion"
-              >
-                <div class="accordion-body bg-white">
-                  <p class="small text-muted mb-2">
-                    <strong>Institution:</strong> Symbiosis College |
-                    <strong>Mentor:</strong> Dr. Kulkarni
-                  </p>
-                  <table class="table table-sm table-hover mb-0">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Total Hours</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Tanmay Sheware</td>
-                        <td>tanmay@example.com</td>
-                        <td>15 hrs</td>
-                      </tr>
-                      <tr>
-                        <td>Aarav Mehta</td>
-                        <td>aarav@example.com</td>
-                        <td>12 hrs</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-
-            <!-- Group 3 -->
-            <div class="accordion-item rounded-0 border-0">
-              <h2 class="accordion-header" id="headingThree">
-                <button
-                  class="accordion-button collapsed fw-bold"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseThree"
-                  aria-expanded="false"
-                  aria-controls="collapseThree"
-                >
-                  Clothing Drive - Team Gamma (5 / 20 Participants)
-                </button>
-              </h2>
-              <div
-                id="collapseThree"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingThree"
-                data-bs-parent="#groupsAccordion"
-              >
-                <div class="accordion-body bg-white">
-                  <p class="small text-muted mb-2">
-                    <strong>Institution:</strong> MIT World Peace University |
-                    <strong>Mentor:</strong> Mrs. Joshi
-                  </p>
-                  <table class="table table-sm table-hover mb-0">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Total Hours</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Riya Sen</td>
-                        <td>riya@example.com</td>
-                        <td>8 hrs</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+            <!-- Dynamic groups will be injected here -->
           </div>
         </div>
 
@@ -228,6 +80,7 @@
             <h2 class="h4 mb-0">All Registered Volunteers</h2>
             <input
               type="text"
+              id="volunteerSearchInput"
               class="form-control form-control-sm w-auto"
               placeholder="Search user..."
             />
@@ -244,81 +97,8 @@
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Soham Phansalkar</strong></td>
-                  <td>soham@example.com</td>
-                  <td>9876543210</td>
-                  <td>Team Alpha</td>
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-seva btn-seva--crimson btn-seva--small"
-                    >
-                      Ban
-                    </button>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td><strong>Shubham Chitrakar</strong></td>
-                  <td>shubham@example.com</td>
-                  <td>9876543211</td>
-                  <td>Team Alpha</td>
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-seva btn-seva--crimson btn-seva--small"
-                    >
-                      Ban
-                    </button>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td><strong>Talib Jiruwala</strong></td>
-                  <td>talib@example.com</td>
-                  <td>9876543212</td>
-                  <td>Team Alpha</td>
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-seva btn-seva--crimson btn-seva--small"
-                    >
-                      Ban
-                    </button>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td><strong>Tanmay Sheware</strong></td>
-                  <td>tanmay@example.com</td>
-                  <td>9876543213</td>
-                  <td>Team Beta</td>
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-seva btn-seva--crimson btn-seva--small"
-                    >
-                      Ban
-                    </button>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td><strong>Aarav Mehta</strong></td>
-                  <td>aarav@example.com</td>
-                  <td>9876543214</td>
-                  <td>Team Beta</td>
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-seva btn-seva--crimson btn-seva--small"
-                    >
-                      Ban
-                    </button>
-                  </td>
-                </tr>
+              <tbody id="volunteersTableBody">
+                <!-- Dynamic volunteers will be injected here -->
               </tbody>
             </table>
           </div>

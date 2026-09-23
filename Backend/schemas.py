@@ -87,3 +87,10 @@ class GroupDetailsResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+class AdminUserResponse(UserResponse):
+    groupName: Optional[str] = None
+
+class AdminUserDetailsResponse(AdminUserResponse):
+    attendances: list[AttendanceResponse] = []
+    groupInfo: Optional[GroupResponse] = None
